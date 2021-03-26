@@ -20,3 +20,25 @@
       }
    });
 }());
+
+
+
+function toggle(element){
+	var onoff = document.getElementById("onoff")
+	if (onoff.innerText == "알림 off"){
+		onoff.innerText = "알림 on";
+	}
+	else{
+		onoff.innerText = "알림 off";
+	}
+		
+}
+
+
+function set_time(element){
+	
+	var set_time = document.getElementById("time").value;
+	localStorage.setItem("set_time",set_time);
+	var element = document.getElementById("now_set_time");
+	element.innerText = set_time;
+}

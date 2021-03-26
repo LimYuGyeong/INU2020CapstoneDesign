@@ -8,16 +8,49 @@
     <title>Tizen Wearable Web IDE - Tizen Wearable - Tizen Wearable basic Application</title>
 
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    
     <script src="js/alarm.js"></script>
 </head>
-<body>
+
+
 	
-<div class = "contents">
-	<form>
-      <p><input type="time" value="00:00:00"></p>
-      <p><input type="submit" value="Submit"></p>
-    </form>
-</div>	
+	
+
+
+<body onload="init()">
+	<div class=contents>
+		<div id="switch_div">
+			<label class = "switch">
+				<input type="checkbox" onclick="toggle(this)">
+				<span class="slider round"></span>
+			</label>
+			<p id="onoff">알림 off</p>
+		</div>
+		
+		
+		<form "js/alarm.js" method="get">
+	      <p><input type="time" id = "time" value= "--:--:--"></p>
+	    </form>
+	    <button id = "btn_time_submit" onClick = "set_time(this)">설정</button> <!-- form 안에 들어가서 변경 유지가 안됐었음, button을 바깥으로 빼니까 계속 유지됨. -->
+		<p id="comment_time">현재 설정된 시간: </p>
+		<p id="now_set_time">시간을 설정해주세요</p>
+		
+	</div>
+	
+	<script language = "javascript">
+	
+	function init(){
+	var set_time = localStorage.getItem("set_time")
+	if(set_time) {
+		var element = document.getElementById("now_set_time");
+		element.innerText = set_time;
+	}
+	}
+
+
+	</script>
+
+	
 	
 	
 </body>

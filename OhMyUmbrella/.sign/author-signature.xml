@@ -4,18 +4,18 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"></SignatureMethod>
 <Reference URI="alarm.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>X+Xty/BvhppoYPXt1MDEJL1I5TK+2oKTo+0onMpemAWR+anBe1IhU2MRv4NSf3U+qRMS3xk+lVIJ
-C4YiQWTQQw==</DigestValue>
+<DigestValue>8Cu0tfwtJZr083fdYrxnsLBfK+xInqG2Aa9/3csR612/odoXtWjb0jY27AowVpcl34+ZjOy4eHBZ
+t7ls/Y6IHA==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>2mf+nhVDIsChmHzA7aEsHEcVZCDW8/GUipOuyaMCa47Ivg03Eb53i+OO+I9R8h2RyVvz8/Il75Ir
-xfwkBHGstw==</DigestValue>
+<DigestValue>6e/gRtD7yAvagUr9vFGcWBNx6CG2GkfRGzliu9qovYwd4TLr/LvcnMSRKa8PrC1+nkrKHSlfOF6B
+s+yIkfRrrQ==</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>QTW7TUWXgdUAsYVXzO0+HHQuJ6JNgsRtrvVDTJO6GkT1vc+nJ2n7SABCLpAYkAAhJ3z3fFR5yBDy
-I4FtMCZ8dQ==</DigestValue>
+<DigestValue>3JTf9OeM09QTiJPVbsDF9unmMP+AZdZKYhe9GQAKcs6ERXp5Sq6x1ukxrH2FdWCS6KLv/AgYVTSM
+OKmXBlMlYw==</DigestValue>
 </Reference>
 <Reference URI="destination.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -179,8 +179,8 @@ LUCllw6tXg==</DigestValue>
 </Reference>
 <Reference URI="js%2Falarm.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>p5H15xiIV3NaudgX/knnjxwYJUQuSuHiF1Od1h1OAZTbkZgx/fy38x7Qf7onYzULCt8r5jeHsIbu
-LMExpwxpgQ==</DigestValue>
+<DigestValue>GJ88yKbW9/N5HpruYrfJj5QnnIXkSg/n5besUUoJacoeqYbh0Glpo3hXAVuFOmKkgECjvGkFqN47
+K5P/OBIUFw==</DigestValue>
 </Reference>
 <Reference URI="js%2Flocation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -199,8 +199,8 @@ LMExpwxpgQ==</DigestValue>
 </Reference>
 <Reference URI="location.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>6T6+LelnOXdOHMP9V2DsM1UOcxvPKvn/8/NH8ZTRMM13kZPDoqd2ZMGq4kGv0MGl//rDw8v6j3b5
-qlvjqIxKqQ==</DigestValue>
+<DigestValue>uvq1QZArxSCWf2ljirykv2d6jorEYT8GQFPo+g4LaPvld4gItAPUGJ0EROL81O4TN7yEDm9+HUwB
+mGif/aXsoA==</DigestValue>
 </Reference>
 <Reference URI="management.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -217,9 +217,9 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-eLMGLiwOS9Czl6SZM1EfoTfko4mbDqiquHUjgEEJqb3M4rRiwpS9v8sL8l0cxunHbX47RZ5gbPgb
-QQ6APRvjwkzc+n1mGAwRScBVndnWG63rSkKqrGcLJMRckVcZPX3p8b3WgXdQnR1qELBRhq2emwsX
-HrPwHByAlirvbCwkMU0=
+NK0jwBCia51UDwwLNHQBJXdPRSR+bhLRjMz3UeKRE0Aqahup1KDsxMFZpGDPAVwjH/G0jSDBfl/O
+jyfwCMAknwEPkisp0qBcfhg/p9nEKMUROC74512XXBN6BhckhD27ACiCpBhGmuqkoTOgW9oL/WIo
+xnnvxDHy3epj4rr3ROg=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
