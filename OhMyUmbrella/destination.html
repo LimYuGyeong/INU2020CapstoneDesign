@@ -8,7 +8,7 @@
     <title>Tizen Wearable Web IDE - Tizen Wearable - Tizen Wearable basic Application</title>
 
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <script src="js/location.js"></script>
+    <script src="js/destination.js"></script> 
 </head>
 <body>
 
@@ -60,12 +60,9 @@
 
   </select>
 
+
+
 <script language=javascript>
-
-
-
- 
-
 
 
  var cat1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
@@ -237,7 +234,6 @@ function cat1_change(key,sel){
 }
 
 
-
 -->
 
 </script>
@@ -247,34 +243,10 @@ function cat1_change(key,sel){
 
   
   <div id="button_destination_div1">
-	  		<button class="destination_btn" id="destination_btn_set" type="button" onclick="function1()">설정</button>
+	  		<button class="destination_btn" id="destination_btn_set" type="button" onclick="DestinationUpdate()">설정</button>
   </div>
 	
 	
-	
-	<script language=javascript>
-	function function1(select_obj) {
-	var target1 = document.getElementById("area1");
-	var target2 = document.getElementById("area2");
-	var selected_value1 = target1.options[target1.selectedIndex].text;
-	var selected_value2 = target2.options[target2.selectedIndex].text;
-	// alert(selected_value1 + ' : ' + selected_value2);
-	
-
-    var result = '목적지 : '.concat(selected_value1,' , ',selected_value2);
-    localStorage.setItem("RESULT",result);
-    // window.open("location.html?");
-    // location.href="location.html"
-    history.back();
-
-	
-	}
-	
-	</script>
-	
-	
-	
-
 
 
 </body>
