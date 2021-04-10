@@ -8,7 +8,9 @@
     <title>Tizen Wearable Web IDE - Tizen Wearable - Tizen Wearable basic Application</title>
 
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <script src="js/location.js"></script>
+    <script src="js/destination.js"></script> 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 
@@ -18,39 +20,39 @@
 
   <select id=area1 name="h_area1" onChange="cat1_change(this.value,h_area2)" >
 
-   <option>도</option>
+    <option>도</option>
 
-<option value='1'>서울</option>
+<option value='1'>서울특별시</option>
 
-<option value='2'>부산</option>
+<option value='2'>부산광역시</option>
 
-<option value='3'>대구</option>
+<option value='3'>대구광역시</option>
 
-<option value='4'>인천</option>
+<option value='4'>인천광역시</option>
 
-<option value='5'>광주</option>
+<option value='5'>광주광역시</option>
 
-<option value='6'>대전</option>
+<option value='6'>대전광역시</option>
 
-<option value='7'>울산</option>
+<option value='7'>울산광역시</option>
 
-<option value='8'>강원</option>
+<option value='8'>강원도</option>
 
-<option value='9'>경기</option>
+<option value='9'>경기도</option>
 
-<option value='10'>경남</option>
+<option value='10'>경상남도</option>
 
-<option value='11'>경북</option>
+<option value='11'>경상북도</option>
 
-<option value='12'>전남</option>
+<option value='12'>전라남도</option>
 
-<option value='13'>전북</option>
+<option value='13'>전라북도</option>
 
-<option value='14'>제주</option>
+<option value='14'>제주특별자치도</option>
 
-<option value='15'>충남</option>
+<option value='15'>충청남도</option>
 
-<option value='16'>충북</option>
+<option value='16'>충청북도</option>
 
   </select>
 
@@ -60,17 +62,14 @@
 
   </select>
 
+
+
 <script language=javascript>
-
-
-
- 
-
 
 
  var cat1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
 
- var cat1_name = new Array('서울','부산','대구','인천','광주','대전','울산','강원','경기','경남','경북','전남','전북','제주','충남','충북');
+ var cat1_name = new Array('서울특별시','부산광역시','대구광역시','인천광역시','광주광역시','대전광역시','울산광역시','강원도','경기도','경상남도','경상북도','전라남도','전라북도','제주특별자치도','충청남도','충청북도');
 
 
 
@@ -237,7 +236,6 @@ function cat1_change(key,sel){
 }
 
 
-
 -->
 
 </script>
@@ -247,34 +245,8 @@ function cat1_change(key,sel){
 
   
   <div id="button_destination_div1">
-	  		<button class="destination_btn" id="destination_btn_set" type="button" onclick="function1()">설정</button>
+	  		<button class="destination_btn" id="destination_btn_set" type="button" onclick="DestinationUpdate()">설정</button>
   </div>
-	
-	
-	
-	<script language=javascript>
-	function function1(select_obj) {
-	var target1 = document.getElementById("area1");
-	var target2 = document.getElementById("area2");
-	var selected_value1 = target1.options[target1.selectedIndex].text;
-	var selected_value2 = target2.options[target2.selectedIndex].text;
-	// alert(selected_value1 + ' : ' + selected_value2);
+ 
 	
 
-    var result = '목적지 : '.concat(selected_value1,' , ',selected_value2);
-    localStorage.setItem("RESULT",result);
-    // window.open("location.html?");
-    // location.href="location.html"
-    history.back();
-
-	
-	}
-	
-	</script>
-	
-	
-	
-
-
-
-</body>
