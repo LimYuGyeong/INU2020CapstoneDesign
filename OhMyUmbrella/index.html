@@ -11,15 +11,16 @@
     <script src="js/main.js"></script>
 </head>
 
-<body>
+<body onload="init()">
   <div class=contents>
   	<!--<div id="weather"></div>-->
   
   	<div style='margin:auto;'>
-  		<div id="body-weather">
-        	<div id="weather-icon"></div>
-        	<div id="weather-text"></div>
-    	</div>
+  		<div id="body_weather">
+        		<img id = "weather_img" src ="" width=40px height=40px>
+        		<span id = "Temperatures"></span>
+        		<span id = "probability"></span>
+    		</div>
   	
   		<span class=content_text id=textbox>내 우산</span>
   		<br>
