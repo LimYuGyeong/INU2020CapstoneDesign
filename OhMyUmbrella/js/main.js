@@ -38,13 +38,13 @@ function init(){
 	//날씨 아이콘, 기온, 강수확률
 	// PTY 강수형태 (0,없음)(1,비)(2,비/눈)(4,소나기)(5,빗방울)(6,빗방울/눈날림)
 	//비가 오는 경우
-	if(PTY == 1 || PTY == 2){
+	if(PTY == 1 || PTY == 2 || PTY == 4 || PTY == 5 || PTY == 6){
 		var weather_img = document.getElementById("weather_img");
 		weather_img.src = "/image/weather_icon/rain.png";
 	}
 	// PTY 강수형태 (3,눈)(7,눈날림)
 	//눈이 오는 경우
-	else if(PTY == 3){
+	else if(PTY == 3 || PTY == 7){
 		var weather_img = document.getElementById("weather_img");
 		weather_img.src = "/image/weather_icon/snow.png";
 	}
