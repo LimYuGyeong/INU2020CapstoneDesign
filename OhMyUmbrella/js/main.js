@@ -21,44 +21,53 @@ window.onload = function () {
 };
  
 
+/* index.html 화면이 열릴때 마다 실행되는 함수로
+ * 상단의 날씨 이미지를 갱신하는 기능
+ *  */
+function init(){
+	var POP = localStorage.getItem("POP");
+	var PTY = localStorage.getItem("PTY");
+	var SKY = localStorage.getItem("SKY");
+	var T3H = localStorage.getItem("T3H");
+	
+	//var POP = 0;
+	//var PTY = 0;
+	//var SKY = 4;
+	//var T3H = 5;
 
+	//날씨 아이콘, 기온, 강수확률
+	// PTY 강수형태 (0,없음)(1,비)(2,비/눈)(4,소나기)(5,빗방울)(6,빗방울/눈날림)
+	//비가 오는 경우
+	if(PTY == 1 || PTY == 2){
+		var weather_img = document.getElementById("weather_img");
+		weather_img.src = "/image/weather_icon/rain.png";
+	}
+	// PTY 강수형태 (3,눈)(7,눈날림)
+	//눈이 오는 경우
+	else if(PTY == 3){
+		var weather_img = document.getElementById("weather_img");
+		weather_img.src = "/image/weather_icon/snow.png";
+	}
+	// SKY 하늘상태 (1,맑음)
+	//맑은 경우
+	else if(SKY == 1){
+		var weather_img = document.getElementById("weather_img");
+		weather_img.src = "/image/weather_icon/sunny.png";
+	}
+	// SKY 하늘상태 (3,구름많음)(4,흐림)
+	//구름이 많거나 흐린 경우 
+	else if(SKY == 3 || SKY == 4){
+		var weather_img = document.getElementById("weather_img");
+		weather_img.src = "/image/weather_icon/cloud.png";
+	}
+	
+		
+	// T3H 3시간 기온
+	var Temperatures = document.getElementById("Temperatures");
+	Temperatures.innerText = "기온:"+ T3H + "°C";
+	// POP 강수확률 #알림은 POP기준
+	var probability = document.getElementById("probability");
+	probability.innerText = "강수 확률:"+ POP + "%";
 
-
-/**
- * Updates weather icon, status and text.
- * @private
- */
-function updateWeather() {
-    /**
-     * xmlHttp - XMLHttpRequest object for get information about weather
-     */
-    var xmlHttp = new XMLHttpRequest(),
-        weatherInform,
-        elWeatherIcon = document.querySelector("#weather-icon"),
-        elWeatherText = document.querySelector("#weather-text"),
-        weatherIcon,
-        weatherText;
-
-    xmlHttp.overrideMimeType("application/json");
-    xmlHttp.open("GET", URL_WEATHER_DATA, false);
-    xmlHttp.onreadystatechange = function() {
-        // Checks responseText isn't empty
-        if (xmlHttp.responseText) {
-            // Parses responseText to JSON
-            weatherInform = JSON.parse(xmlHttp.responseText);
-            // Gets icon code from information
-            weatherIcon = weatherInform.weather[0].icon;
-            // Gets weather string from information
-            weatherText = weatherInform.weather[0].main;
-
-            elWeatherIcon.style.backgroundImage = "url('./image/weather_icon/" + weatherIcon + ".png')";
-            elWeatherText.innerHTML = weatherText;
-        }
-        // If reponseText is empty, set no wifi icon.
-        else {
-            setDisableIcon("wifi");
-        }
-    };
-
-    xmlHttp.send();
 }
+
