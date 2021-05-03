@@ -140,6 +140,7 @@ body {
 	border-radius:20px;
 	border:0;
 	outline:0;
+	font-weight:bold;
 	background-color:#CDECFA
 }
 
@@ -147,6 +148,7 @@ body {
 	border-radius:20px;
 	border:0;
 	outline:0;
+	font-weight:bold;
 	background-color:#CDECFA
 }
 
@@ -616,12 +618,20 @@ p {
 #center_text1{
 	font-size:1.5em;
 	justify-content: center;
+	color:#7E6ECD;
 }
 #name_register{
 	font-size:1.3em;
+	color:#7878AA;
 }
 #address_register{
 	font-size:1.3em;
+	color:#7878AA;
+}
+#register_list{
+	text-align: center;
+	color:#7E6ECD;
+	background-color:#fefcff;
 }
 
 /*--------delete.html--------*/
@@ -648,11 +658,19 @@ p {
 #center_text2{
 	font-size:1.5em;
 	justify-content: center;
+	color:#7E6ECD;
 }
 #name_delete{
 	font-size:1.3em;
+	color:#7878AA
 }
 #address_delete{
 	font-size:1.3em;
+	color:#7878AA
+}
+#delete_list{
+	text-align: center;
+	color:#7E6ECD;
+	background-color:#fefcff;
 }
 
