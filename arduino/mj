@@ -1,0 +1,59 @@
+#include <ArduinoBLE.h>
+BLEService com("180F");
+BLEUnsignedCharCharacteristic battery("2A19",BLERead|BLENotify);
+BLECharCharacteristic sound("2A1A",BLEWrite|BLERead|BLENotify);
+
+void setup() {
+  BLE.begin();
+  BLE.setEventHandler(BLEConnected,onBLEConnected);
+  
+  sound.setEventHandler(BLEWritten,onBLEWritten);
+  pinMode(A3,OUTPUT);
+  BLE.setLocalName("WOOSAN");
+  BLE.setAdvertisedService(com);
+  com.addCharacteristic(battery);
+  com.addCharacteristic(sound);
+  BLE.addService(com);
+
+  BLE.advertise();
+  Serial.begin(9600);
+}
+
+void loop() {
+  BLEDevice central=BLE.central();
+  if (central)
+  {
+  int bat = analogRead(A0);
+  float vol=(float)bat/1023*3.3*5;
+  int p=58.82*vol-147.0;
+  Serial.print(vol);
+  Serial.print("  ");
+  Serial.print(p);
+  Serial.print("%");
+  Serial.println();
+  battery.writeValue(p);
+  delay(1000);
+  }
+
+  
+
+
+
+}
+
+void onBLEConnected(BLEDevice central){
+  tone(A3,300);
+  delay(300);
+  noTone(A3);
+  
+}
+
+
+
+void onBLEWritten(BLEDevice central, BLECharacteristic character){
+  tone(A3,300);
+  delay(300);
+  tone(A3,400);
+  delay(300);
+  noTone(A3);
+}
