@@ -1,3 +1,4 @@
+/*
 window.onload = function () {
     // TODO:: Do your initialization job
 
@@ -18,6 +19,30 @@ window.onload = function () {
     });
     
 };
+*/
+
+(function () {
+	   window.addEventListener("tizenhwkey", function (ev) {
+	      var activePopup = null,
+	         page = null,
+	         pageId = "";
+
+	      if (ev.keyName === "back") {
+	         activePopup = document.querySelector(".ui-popup-active");
+	         page = document.getElementsByClassName("ui-page-active")[0];
+	         pageId = page ? page.id : "";
+
+	         if (pageId === "main" && !activePopup) {
+	            try {
+	               tizen.application.getCurrentApplication().exit();
+	            } catch (ignore) {
+	            }
+	         } else {
+	            window.history.back();
+	         }
+	      }
+	   });
+	}());
  
 
 localStorage.setItem("c_or_d","c");
@@ -27,6 +52,37 @@ console.log(c_or_d);
  * 상단의 날씨 이미지를 갱신하는 기능
  *  */
 function main_init(){
+	var now = new Date();
+	console.log('now : ', now);
+	
+	/* 메인 화면 UI 설정 부분 */
+	var battery = document.getElementById("battery")
+	var bat = localStorage.getItem("BATTERY");
+	battery.innerText = bat;
+	
+	if (parseInt(bat) < 25) {
+		alert("우산 충전이 필요합니다");
+	}
+	
+	var textbox = document.getElementById("textbox")
+	
+	if (localStorage.getItem("UMBRELLA") != null) {
+		textbox.innerText = localStorage.getItem("UMBRELLA");
+	}
+	else{
+		textbox.innerText = "내 우산";
+	}
+	
+	var connectStatus = document.getElementById("connectStatus")
+	
+	if (localStorage.getItem("connectStatus") != null) {
+		connectStatus.innerText = localStorage.getItem("connectStatus");
+	}
+	
+
+
+   
+	   
 	var c_or_d = localStorage.getItem("c_or_d");
 	console.log("main_init 안");
 	console.log(c_or_d);
@@ -66,6 +122,23 @@ function main_init(){
 			if(PTY == 1 || PTY == 2 || PTY == 4 || PTY == 5 || PTY == 6){
 				var weather_img = document.getElementById("weather_img");
 				weather_img.src = "/image/weather_icon/rain.png";
+				
+				var hour = localStorage.getItem('HOUR');
+				var minute = localStorage.getItem('MINUTE');
+				console.log('hour : ', hour, ', minute : ',minute);
+				
+				if (now.getHours()==hour && now.getMinutes()==minute) {
+					console.log('in if');
+					var notificationGroupDict =
+			    	{
+			    	  content: "오늘은 비가 오니 우산을 챙겨가세요!",
+			    	  actions: {soundPath: "music/Over the horizon.mp3", vibration: true}
+			    	};
+
+			    	var notification = new tizen.UserNotification('SIMPLE', '비 알림', notificationGroupDict);
+			    	tizen.notification.post(notification);
+				}
+				
 			}
 			// PTY 강수형태 (3,눈)(7,눈날림)
 			//눈이 오는 경우
@@ -452,27 +525,140 @@ function updateWeatherDestination(){
 	   }
 	}
 
+function find(){
+	/*
+	var adapter = tizen.bluetooth.getLEAdapter();
+	
+	var advertiseData = new tizen.BluetoothLEAdvertiseData({
+	    includeName: true,
+	    serviceuuids: ['180F'] // 180F is 16bit Battery Service UUID
+	});
+	var connectable = true;
+
+	adapter.startAdvertise(advertiseData, 'ADVERTISE', function onstate(state) {
+	    console.log('Advertising configured: ' + state);
+	    
+	    console.log(advertiseData);
+	    
+	    for(var key in advertiseData){
+			 console.log('attr: '+key+", value: "+advertiseData[key]);
+		 }
+	    
+	}, function(error) {
+	    console.log('startAdvertise() failed: ' + error.message);
+	}, 'LOW_LATENCY', connectable);
+	*/
+	
+	
+	function connectFail(e) {
+	}
+
+	function connectSuccess() {
+	}
+	var adapter = tizen.bluetooth.getLEAdapter();
+	adapter.startScan(function onsuccess(device)
+	{
+		
+		if (device.address == "5C:16:2F:6D:BF:FC")
+		{
+		
+			
+	    console.log("Found device: " + device.name);
+	    adapter.stopScan();
+	    
+	    
+	    device.connect(connectSuccess, connectFail); //connect
+	    
+	    /*
+	    try{
+	    var serviceUUID = device.getService(device.uuids[0]);
+		var property = serviceUUID.characteristics[1];
+	      
+	      if (!property.isWritable) {
+	          alert('Property seems not to be writable. Attempting to write...');
+	      }
+	      
+	      alert('send Value');
+	      var newValue = [1];
+
+	      property.writeValue(newValue, function()
+	        {
+	      	alert("Value written");
+	          //device.disconnect();
+	        },
+	        function(e)
+	        {
+	      	  alert("Failed to write: " + e.message);
+	        });
+	    } catch (e) {
+	    	  alert(e.message);
+	    	}
+
+	      adapter.stopScan();
+	      */
+	  }
+	});
+
+}
+
 function re_connect() {
 	var address = localStorage.getItem("ADDRESS");
 	var adapter = tizen.bluetooth.getLEAdapter();
 	
 	var connectionListener = {
 		    onconnected: function(device) {
-		    	alert('Connected to the device: ' + device.name + ' [' + device.address + ']');
+		    	
+		    	
+		    	localStorage.setItem("UMBRELLA", device.name);
+		    	localStorage.setItem("connectStatus", "연결됨");
+		    	
+		    	var serviceUUID = device.getService(device.uuids[0]);
+				var property = serviceUUID.characteristics[0];
+			      
+
+			      property.readValue(function(val)
+			    	      {
+			          console.log("Value read: " + val);
+			          localStorage.setItem("BATTERY", val);
+			          //device.disconnect();
+			        });
+			      
+			     
 		    },
 		    ondisconnected: function(device) {
-		    	adapter.startScan(onsuccess);
-		    	alert('Disconnected from the device ' + device.name + ' [' + device.address + ']');
+		    	var bat = localStorage.getItem("BATTERY");
+		    	
+		    	if (parseInt(bat)>5) {
+		    		localStorage.setItem("UMBRELLA", "우산 잃어버림");
+				}
+		    	else {
+		    		localStorage.setItem("UMBRELLA", "배터리 없음");
+				}
+		    	
+		    	
+		    	localStorage.setItem("connectStatus", "연결안됨");
+		    	
+		    	var notificationGroupDict =
+		    	{
+		    	  content: "우산과의 연결이 끊어졌습니다!",
+		    	  actions: {soundPath: "music/Over the horizon.mp3", vibration: true}
+		    	};
+
+		    	var notification = new tizen.UserNotification('SIMPLE', '우산 연결 끊어짐', notificationGroupDict);
+		    	tizen.notification.post(notification);
+		    	
+		    	console.log('Disconnected from the device ' + device.name + ' [' + device.address + ']');
 		    }
 		};
 
 	function connectFail(e) {
-	    alert('Failed to connect to device: ' + e.message);
+	    alert('우산과 연결에 실패했습니다. 다시 시도해주세요.');
 	}
 
 	function connectSuccess() {
 		localStorage.setItem("ADDRESS", address);
-		console.log('Connected to device');
+		alert("재연결에 성공했습니다.");
+		//window.location.reload();
 	}
 	
 	function onsuccess(device)
@@ -491,3 +677,14 @@ function re_connect() {
 	adapter.startScan(onsuccess);
 	
 }
+
+/*startAlert = function() {
+	  playAlert = setInterval(function() {
+	    alert('http://webisfree.com');
+	  }, 3000);
+	};
+	
+	
+stopAlert = function() {
+	   clearInterval(playAlert);
+	};*/

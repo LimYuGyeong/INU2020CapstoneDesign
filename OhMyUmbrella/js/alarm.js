@@ -64,7 +64,8 @@ function set_time(element){
  	 	minute = parseInt(minute);
  	 	localStorage.setItem("HOUR", hour);
  	 	localStorage.setItem("MINUTE", minute);
- 		
+ 		console.log("hour",hour);
+ 		console.log("minute",minute);
 		add_alarm(hour, minute);
  	 	
  	}
@@ -73,11 +74,20 @@ function set_time(element){
 
 
 function add_alarm(hour, minute){
+	tizen.alarm.removeAll(); // 설정된 알람 모두 삭제
+	
 	
 	var now = new Date();
 	var date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute);
 	var alarm = new tizen.AlarmAbsolute(date, ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]); // date 시각에 첫 알람이 시작해서 매일 반복
+	console.log(date);
 
+	var appControl = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/view");
+	tizen.alarm.add(alarm, tizen.application.getCurrentApplication().appInfo.id, appControl);
+	
+	
+	
+	/*
 	var notificationGroupDict =
 	{
 	  content: "오늘은 비가 오니 우산을 챙겨가세요!",
@@ -86,7 +96,8 @@ function add_alarm(hour, minute){
 	
 	var notification = new tizen.UserNotification("SIMPLE", "오늘의 우산", notificationGroupDict);
 	
-	/* Adds an alarm. */
 	tizen.alarm.addAlarmNotification(alarm, notification);
+	*/
+
 	
 }
