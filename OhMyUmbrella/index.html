@@ -19,24 +19,26 @@
   
   	<div style='margin:auto;'>
   		<div id="body_weather" onclick=chageLocation();>
-        		<img id = "weather_img" src ="" width=40px height=40px>
+        		<img id = "weather_img" src ="" width=50px height=50px>
         		<span id = "CorD"></span>
         		<span id = "Temperatures"></span>
         		<span id = "probability"></span>
     		</div>
-  	
+
   		<span class=content_text id=textbox>내 우산</span>
   		<br>
-  		<div>
-	  		<span id="connect_status_text">  연결 상태: </span>
-	  		<br>
-	  		<span id="battery_status_text">  배터리 상태: </span>
+
+  		
+  		<div id="box">
+  			<span id="connect_status_text">  연결 상태: <span id="connectStatus">연결안됨</span> </span>
+  			<br>
+  			<span id="battery_status_text">  배터리 상태: <span id="battery"></span> % </span>
   		</div>
   		
   	</div>
   	<div id = "button_group">
 	  	<div id="button_div1">
-	  		<button class="main_btn" id="btn_find" type="button"><img src = "/image/find.png" width=45px height=45px ></button>
+	  		<button class="main_btn" id="btn_find" type="button" onclick="find()"><img src = "/image/find.png" width=45px height=45px ></button>
 	  	</div>
 	  	<div id="button_div2">
 	  		<button class="main_btn" id="btn_alarm" type="button" onclick="location.href='alarm.html'"><img src = "image/alarm.png" width=45px height=45px></button>
