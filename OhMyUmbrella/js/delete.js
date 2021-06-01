@@ -34,21 +34,42 @@ $(document).ready(function() {
 
 
 function del() {
-	var adapter = tizen.bluetooth.getLEAdapter();
+
+	var address = localStorage.getItem("ADDRESS");
 	
-	adapter.startScan(function onsuccess(device)
-	{
-		if (device.address == address)
-	  {
-	    console.log("Found device: " + device.name);
-	    adapter.stopScan();
-	    
-	    device.disconnect();
-	    
-	  }
-	});
+/*	var appControlReplyCallback = {
+			// callee sent a reply
+			onsuccess: function(data) {
+				console.log(data);
+				localStorage.setItem("UMBRELLA", "내 우산");
+		    	localStorage.setItem("connectStatus", "연결됨");
+
+			},
+			// callee returned failure
+			onfailure: function() {
+				alert('The launch application control failed');
+			}
+	}
+	*/
+	var obj = new tizen.ApplicationControlData("M0r5iHmiP1.OhMyUmbrella", [address, "delete"]);
+
+	var obj1 = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/service",
+			null,
+			null,
+			null,
+			[obj] 
+	);
+
+	tizen.application.launchAppControl(obj1,
+			"M0r5iHmiP1.servicebluetooth",
+			function() {console.log("Launch Service succeeded"); },
+			function(e) {console.log("Launch Service failed : " + e.message);},
+			null);
 	
 	localStorage.setItem("NAME", "" );
 	localStorage.setItem("ADDRESS", "");
+	localStorage.setItem("UMBRELLA", "내 우산");
+	localStorage.setItem("connectStatus", "연결안됨");
 	window.location.reload();
+	
 }

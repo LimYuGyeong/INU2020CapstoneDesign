@@ -22,31 +22,6 @@
 }());
 
 
-/*
-var timerID;
-$(document).ready(function () {
-
-        //e.preventDefault();
-        updateData();
-    $('#stop').on('click',function(e){
-        e.preventDefault();
-       clearTimeout(timerID); // 타이머 중지
-        //$('#showtime').html('');
-    });
-});
-
-function updateData(){
-    $.ajax({
-      url: "getserver.php",
-      type:"post",
-      cache : false,
-      success: function(data){ // getserver.php 파일에서 echo 결과값이 data 임
-       $('#showtime').html(data);
-      }
-    });
-    timerID = setTimeout("updateData()", 1000); // 2초 단위로 갱신 처리
-}
-*/
 
 
 function multiDimensionalUnique(arr) {
@@ -103,7 +78,43 @@ function OK(name, address){
 	var r = confirm(name + ' [' + address + ']\n' + '연결하시겠습니까?');
 	if (r==true)
 	{
-		func(name, address);
+		//func(name, address);
+		
+		///* native app 실행부 *///
+	      var appControlReplyCallback = {
+					// callee sent a reply
+					onsuccess: function(data) {
+
+						console.log('reply : ', data[0].value[0]);
+
+					},
+					// callee returned failure
+					onfailure: function() {
+						console.log('The launch application control failed');
+					}
+			}
+
+	      
+				var obj = new tizen.ApplicationControlData("M0r5iHmiP1.OhMyUmbrella", [address,"address"]);
+
+			var obj1 = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/service",
+					null,
+					null,
+					null,
+					[obj] 
+			);
+
+			tizen.application.launchAppControl(obj1,
+					"M0r5iHmiP1.servicebluetooth",
+					function() {console.log("Launch Service succeeded"); },
+					function(e) {console.log("Launch Service failed : " + e.message);},
+					appControlReplyCallback);
+			
+			alert('연결에 성공했습니다');
+			localStorage.setItem("NAME", name );
+			localStorage.setItem("ADDRESS", address);
+			localStorage.setItem("UMBRELLA", name);
+	    	localStorage.setItem("connectStatus", "연결됨");
 	}
 	
 }
@@ -130,8 +141,12 @@ function func(name, address) {
 			        });
 			      
 			      
-			      //alert('Connected to the device: ' + device.name + ' [' + device.address + ']');
 			      alert('연결에 성공했습니다');
+			      
+			      
+			      
+			      
+			      
 		    },
 		    ondisconnected: function(device) {
 		    	var bat = localStorage.getItem("BATTERY");
