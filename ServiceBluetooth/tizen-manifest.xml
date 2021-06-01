@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<manifest xmlns="http://tizen.org/ns/packages" api-version="5.5" package="org.example.servicebluetooth" version="1.0.0">
+    <profile name="wearable"/>
+    <service-application appid="org.example.servicebluetooth" exec="servicebluetooth" multiple="false" nodisplay="true" taskmanage="false" type="capp">
+        <label>servicebluetooth</label>
+        <icon>servicebluetooth.png</icon>
+        <background-category value="background-network"/>
+        <background-category value="media"/>
+        <background-category value="download"/>
+        <background-category value="location"/>
+        <background-category value="iot-communication"/>
+        <background-category value="sensor"/>
+    </service-application>
+    <privileges>
+        <privilege>http://tizen.org/privilege/appmanager.launch</privilege>
+        <privilege>http://tizen.org/privilege/bluetooth</privilege>
+        <privilege>http://tizen.org/privilege/notification</privilege>
+    </privileges>
+</manifest>
